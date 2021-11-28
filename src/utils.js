@@ -1,5 +1,9 @@
 const assertType = (value, type) => {
-  return Object.prototype.toString.call(value) === `[object ${type}]`
+  if(type === 'function'){
+    return typeof value === type;
+  }
+
+  return Object.prototype.toString.call(value) === `[object ${type}]`;
 }
 
 export {

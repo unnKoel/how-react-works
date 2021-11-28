@@ -5,7 +5,8 @@ const innerRender = (virtualDom = {}) => {
     element = document.createTextNode(virtualDom);
     return element;
   }
-  const { ele, attrs, children } = virtualDom;
+
+  const { ele, attrs = {}, children = [] } = virtualDom;
   element = document.createElement(ele);
   for (let attrName in attrs) {
     element.setAttribute(attrName, attrs[attrName]);
@@ -21,7 +22,6 @@ const render = (virtualDom, container) => {
   // const fragment = new DocumentFragment();
   const realDom = innerRender(virtualDom);
 
-  console.log(realDom.outerHTML);
   (typeof container === 'string' ? document.querySelector(container) : container).append(realDom);
 }
 

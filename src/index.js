@@ -27,9 +27,11 @@ export const createElement = (ele, attrs, ...children) => {
 
 const fiberNodeStack = Stack();
 let rootFiberNode = null;
-// export const render = (rootComponent) => {
-//   componentWrapper(rootComponent)();
-// }
+let currentFiberNode = rootFiberNode;
+
+const getRootVirtualDomRef = () => {
+  return rootFiberNode && rootFiberNode.virtualDomRef;
+}
 
 export const getRootFiberNode = () => {
   return rootFiberNode;
@@ -41,6 +43,7 @@ function createNewFiberNode() {
     parentFiberNode: null,
     virtualDomRef: null,
     states: [],
+    stateIndex: 0,
     component: () => null,
   }
 }
@@ -61,6 +64,7 @@ function componentWrapper(component) {
 
  return (props) => {
    const componentVirtualDom = component(props);
+   fiberNode.stateIndex = 0;
    fiberNode.virtualDomRef = componentVirtualDom;
    
    fiberNodeStack.pop();
@@ -68,3 +72,6 @@ function componentWrapper(component) {
  }
 }
 
+export {
+  currentFiberNode,
+}

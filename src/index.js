@@ -1,5 +1,6 @@
 import { assertType } from "./utils";
 import _ from 'lodash';
+import Stack from './stack';
 
 export const createElement = (ele, attrs, ...children) => {
    // ? how to assert parameter type
@@ -13,7 +14,7 @@ export const createElement = (ele, attrs, ...children) => {
   children = _.flatten(children);
 
   if(assertType(ele, 'function')) {
-    const childTreeRoot = ele({...attrs, children});
+    const childTreeRoot = componentWrapper(ele)({...attrs, children});
     return childTreeRoot
   }
 
@@ -23,3 +24,47 @@ export const createElement = (ele, attrs, ...children) => {
     children,
   };
 };
+
+const fiberNodeStack = Stack();
+let rootFiberNode = null;
+// export const render = (rootComponent) => {
+//   componentWrapper(rootComponent)();
+// }
+
+export const getRootFiberNode = () => {
+  return rootFiberNode;
+}
+
+function createNewFiberNode() {
+  return {
+    childFiberNode: [],
+    parentFiberNode: null,
+    virtualDomRef: null,
+    states: [],
+    component: () => null,
+  }
+}
+
+function componentWrapper(component) {
+ const parentFiberNode = fiberNodeStack.peek();
+
+ const fiberNode = createNewFiberNode();
+ fiberNode.parentFiberNode = parentFiberNode;
+ fiberNode.component = component;
+
+ parentFiberNode && parentFiberNode.childFiberNode.push(fiberNode);
+ if(parentFiberNode === undefined) {
+   rootFiberNode = fiberNode;
+ }
+
+ fiberNodeStack.push(fiberNode);
+
+ return (props) => {
+   const componentVirtualDom = component(props);
+   fiberNode.virtualDomRef = componentVirtualDom;
+   
+   fiberNodeStack.pop();
+   return componentVirtualDom;
+ }
+}
+

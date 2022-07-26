@@ -1,19 +1,24 @@
-import { currentFiberNode } from './index';
+import { fiberNodeStack, retrieveFiberNodeTree } from './index';
 
 const useState = (initialValue) => {
-  const { stateIndex } = currentFiberNode; 
-  const value = currentFiberNode.states[stateIndex];
+  const fiberNode = fiberNodeStack.peek();
+
+  const { stateIndex } = fiberNode; 
+  const value = fiberNode.states[stateIndex];
+  
   if(!value) {
-     currentFiberNode.states[stateIndex] = initialValue;
+    fiberNode.states[stateIndex] = initialValue;
   }
 
-  const setValue = (value) => {
-    currentFiberNode.states[stateIndex] = value;
+  const setState = (value) => {
+    fiberNode.states[stateIndex] = value;
+    // trigger retrieving fiber node tree.
+    retrieveFiberNodeTree();
   }
 
-  currentFiberNode.stateIndex = ++stateIndex;
+  fiberNode.stateIndex = ++stateIndex;
 
-  return [value || initialValue, setValue];
+  return [value || initialValue, setState];
 };
 
 

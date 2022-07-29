@@ -14,8 +14,8 @@ export const createElement = (ele, attrs, ...children) => {
   children = _.flatten(children);
 
   if(assertType(ele, 'function')) {
-    const childTreeRoot = componentWrapper(ele)({...attrs, children});
-    return childTreeRoot
+    const componentVirtualTreeRoot = componentWrapper(ele, attrs)({...attrs, children});
+    return componentVirtualTreeRoot;
   }
 
   return {
@@ -48,7 +48,7 @@ function createNewFiberNode() {
   }
 }
 
-function componentWrapper(component) {
+function componentWrapper(component, attrs) {
  const parentFiberNode = fiberNodeStack.peek();
 
  const fiberNode = createNewFiberNode();
@@ -65,10 +65,16 @@ function componentWrapper(component) {
  return (props) => {
    const componentVirtualDom = component(props);
    fiberNode.stateIndex = 0;
-   fiberNode.virtualDomRef = componentVirtualDom;
+    // Add an extra component markup to create a boundary with descendant components.
+    // make it possible that comparing virtual dom tree based on component as a unit step by step.
+   fiberNode.virtualDomRef = {
+     ele: component.name,
+     attrs,
+     children: [componentVirtualDom]
+   };
    
    fiberNodeStack.pop();
-   return componentVirtualDom;
+   return fiberNode.virtualDomRef;
  }
 }
 

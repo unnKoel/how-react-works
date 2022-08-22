@@ -13,7 +13,7 @@ const useState = (initialValue) => {
   const setState = (value) => {
     fiberNode.states[stateIndex] = value;
     // trigger retrieving fiber node tree.
-    retrieveFiberNodeTree();
+    retrieveFiberNodeTree(fiberNode);
   }
 
   fiberNode.stateIndex = ++stateIndex;

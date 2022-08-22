@@ -26,15 +26,6 @@ export const createElement = (ele, attrs, ...children) => {
 };
 
 export const fiberNodeStack = Stack();
-let rootFiberNode = null;
-
-const getRootVirtualDomRef = () => {
-  return rootFiberNode && rootFiberNode.virtualDomRef;
-}
-
-export const getRootFiberNode = () => {
-  return rootFiberNode;
-}
 
 function createNewFiberNode() {
   return {
@@ -78,10 +69,12 @@ function componentWrapper(component, attrs) {
  }
 }
 
-let currentFiberNode;
+let rootFiberNode = null;
+let currentFiberNode = null;
 
-function retrieveFiberNodeTree() {
-  currentFiberNode = rootFiberNode;
+function retrieveFiberNodeTree(fiberNode) {
+  rootFiberNode = fiberNode;
+  currentFiberNode = fiberNode;
   fiberNodeStack.push(currentFiberNode);
   
 }

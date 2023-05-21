@@ -3,3 +3,6 @@
 
 Involving `typescript` to achieve a goal that's creating a library in typescript.
 
+## reference
+- [[@babel/preset-env] useBuiltIns for libraries?](https://github.com/babel/babel/issues/7267)
+- [react18 parsing: The implementation of Automatic Batching](https://juejin.cn/post/7196313603426910269)

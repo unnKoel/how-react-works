@@ -3,7 +3,7 @@
 
 Involving `typescript` to achieve a goal that's creating a library in typescript.
 
-## destructure of React
+## destructure React
 - JSX compiler
 - Render phase
   - creation of Fiber tree

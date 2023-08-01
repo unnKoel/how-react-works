@@ -8,8 +8,6 @@ Involving `typescript` to achieve a goal that's creating a library in typescript
 
   Compile JSX syntax to React.creactElement function. 
 
-  **One question** is try to think how to convet JSX syntax to function.
-
 - Render phase
   - creation of Fiber tree
   - Diff of Fiber tree
@@ -29,13 +27,12 @@ Involving `typescript` to achieve a goal that's creating a library in typescript
   - useEffect
   - useMemo
   - useContext
+  - useRef
+  - useCallback
 
 - Context, ErrorBoundary and Suspense based on Stack
 
   How to find out the closest Context, ErrorBoundary and Suspense component, then apply them where nested components need. Introducing Stack to keep the relevant and closest Context, ErrorBoundary and Suspense on the top of Stack to access it in a simply way. 
-
-  **One question** is try to find out the connection of Suspense and async render.
-  
 
 ## reference
 - [[@babel/preset-env] useBuiltIns for libraries?](https://github.com/babel/babel/issues/7267)

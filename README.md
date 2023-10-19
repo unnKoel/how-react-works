@@ -1,14 +1,15 @@
 # how react works
- To understand react better, fullfill a exprimental react within a playaround full of thinking, guess and validation.
 
-Involving `typescript` to achieve a goal that's creating a library in typescript.
+To understand react better, fullfill a exprimental react within a playaround full of thinking, guess and validation.
 
 ## destructure React
+
 - JSX compiler
 
-  Compile JSX syntax to React.creactElement function. 
+  Compile JSX syntax to React.creactElement function.
 
 - Render phase
+
   - creation of Fiber tree
   - Diff of Fiber tree
 
@@ -23,6 +24,7 @@ Involving `typescript` to achieve a goal that's creating a library in typescript
   **One question** this will bring is when some nodes in Fiber tree are updated repeatedly by a few updates in different priority, what can we do to merge those updates that works on the same node to ensure the latest state is reflected.
 
 - Functional Component and Hooks based on closure
+
   - useState
   - useEffect
   - useMemo
@@ -32,8 +34,15 @@ Involving `typescript` to achieve a goal that's creating a library in typescript
 
 - Context, ErrorBoundary and Suspense based on Stack
 
-  How to find out the closest Context, ErrorBoundary and Suspense component, then apply them where nested components need. Introducing Stack to keep the relevant and closest Context, ErrorBoundary and Suspense on the top of Stack to access it in a simply way. 
+  How to find out the closest Context, ErrorBoundary and Suspense component, then apply them where nested components need. Introducing Stack to keep the relevant and closest Context, ErrorBoundary and Suspense on the top of Stack to access it in a simply way.
 
 ## reference
+
 - [[@babel/preset-env] useBuiltIns for libraries?](https://github.com/babel/babel/issues/7267)
 - [react18 parsing: The implementation of Automatic Batching](https://juejin.cn/post/7196313603426910269)
+
+## Q&A
+
+- An error occurs when jest's running which says `Error: You must provide the URL of lib/mappings.wasm by calling SourceMapConsumer.initialize`
+
+  As another workaround, export NODE_OPTIONS=--no-experimental-fetch should work

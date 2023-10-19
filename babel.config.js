@@ -1,4 +1,13 @@
+// eslint-disable-next-line no-undef
 module.exports = {
-  presets: [["@babel/preset-env"], "@babel/preset-typescript"],
-  plugins: ["@babel/plugin-transform-runtime"],
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        corejs: { version: '3.26.1', proposals: true },
+        useBuiltIns: 'usage',
+        targets: { node: 'current' },
+      },
+    ],
+  ],
 };

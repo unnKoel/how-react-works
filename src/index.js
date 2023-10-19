@@ -1,5 +1,17 @@
-function sum(a, b) {
-  return a + b;
+
+const createElement = (tag, attrs, children) => {
+  return {
+    tag,
+    attrs,
+    children
+  }
 }
 
-export default sum;
+const render = () => {
+
+}
+
+export {
+  createElement,
+  render
+}

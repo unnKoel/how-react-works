@@ -1,8 +1,8 @@
-# how react works
+# How react works
 
-To understand react better, fullfill a exprimental react within a playaround full of thinking, guess and validation.
+Just for fun and challenge myself
 
-## destructure React
+## Destructure React
 
 - JSX compiler
 
@@ -36,7 +36,14 @@ To understand react better, fullfill a exprimental react within a playaround ful
 
   How to find out the closest Context, ErrorBoundary and Suspense component, then apply them where nested components need. Introducing Stack to keep the relevant and closest Context, ErrorBoundary and Suspense on the top of Stack to access it in a simply way.
 
-## reference
+## tasks
+
+- transform jsx to fiber tree in case without component.
+  ![](./doc/jsx-fiber.jpg)
+  
+- involve component while jsx to fiber tree.
+
+## Reference
 
 - [[@babel/preset-env] useBuiltIns for libraries?](https://github.com/babel/babel/issues/7267)
 - [react18 parsing: The implementation of Automatic Batching](https://juejin.cn/post/7196313603426910269)
